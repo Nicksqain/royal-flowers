@@ -10,6 +10,6 @@ const Auth: FC<AuthProps> = (  ) => {
      Auth
     </div>
   )
-}s
+}
 
 export default Auth;
