@@ -5,4 +5,13 @@ import tsconfigPaths from "vite-tsconfig-paths"
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigPaths()],
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://royal-flowers.strattonit.ru/api',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
 })
