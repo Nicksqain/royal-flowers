@@ -1,6 +1,28 @@
-# React + TypeScript + Vite
+## Начало работы
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Следуйте этим шагам, чтобы настроить и запустить проект:
+
+1. **Установите зависимости**:
+  ```bash
+  yarn install
+  ```
+
+2. **Запустите сервер разработки**:
+  ```bash
+  yarn dev
+  ```
+
+3. **Соберите проект для продакшена**:
+  ```bash
+  yarn build
+  ```
+
+4. **Просмотрите сборку для продакшена**:
+  ```bash
+  yarn preview
+  ```
+
+## Available Plugins
 
 Currently, two official plugins are available:
 
