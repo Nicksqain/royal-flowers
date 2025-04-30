@@ -1,5 +1,5 @@
 import { fetchAmoCrmPipelines } from '@/api/amocrm';
-import { AmoCrmPipeline } from '@/api/amocrm/types';
+import { AmoCrmPipeline, AmoCrmStatus } from '@/api/amocrm/types';
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 // Асинхронная функция для получения воронок с сервера
@@ -10,18 +10,20 @@ export const fetchPipelines = createAsyncThunk('amocrm/fetchPipelines', async ()
 
 interface AmocrmState {
   activePipeline: AmoCrmPipeline | null;
+  activeStatus: AmoCrmStatus | null;
   pipelines: AmoCrmPipeline[];
   loading: boolean;
   error: string | null;
 }
 
-const loadStateFromLocalStorage = () => {
-  const savedState = localStorage.getItem('activePipeline');
+const loadStateFromLocalStorage = (key: string) => {
+  const savedState = localStorage.getItem(key);
   return savedState ? JSON.parse(savedState) : null;
-
 };
+
 const initialState: AmocrmState = {
-  activePipeline: loadStateFromLocalStorage(),
+  activePipeline: loadStateFromLocalStorage('activePipeline'),
+  activeStatus: loadStateFromLocalStorage('activeStatus'),
   pipelines: [],
   loading: false,
   error: null,
@@ -35,6 +37,10 @@ const amocrmSlice = createSlice({
       state.activePipeline = action.payload;
       localStorage.setItem('activePipeline', JSON.stringify(action.payload));
     },
+    setActiveStatus(state, action) {
+      state.activeStatus = action.payload;
+      localStorage.setItem('activeStatus', JSON.stringify(action.payload));
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -54,5 +60,5 @@ const amocrmSlice = createSlice({
 });
 
 // Экспортируем действия и редюсер
-export const { setActivePipeline } = amocrmSlice.actions;
+export const { setActivePipeline, setActiveStatus } = amocrmSlice.actions;
 export default amocrmSlice.reducer;

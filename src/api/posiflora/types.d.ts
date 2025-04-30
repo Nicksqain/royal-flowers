@@ -47,3 +47,54 @@ export interface PosifloraStore {
   attributes: StoreAttributes;
   relationships: StoreRelationships;
 }
+
+// PRODUCTS
+export type PosifloraProductsResponse = PosifloraProduct[];
+export interface ProductAttributes {
+  title?: string;
+  description?: string | null;
+  itemType?: string;
+  globalId?: any;
+  updatedAt?: string;
+  added?: any;
+  postfix?: any;
+  public?: boolean;
+  fractional?: boolean;
+  minPrice?: number;
+  maxPrice?: number;
+  revision?: number;
+  deleted?: boolean;
+  cost?: number;
+}
+export interface ProductRelationships {
+  group: {
+    data: {
+      type: string;
+      id: string;
+    };
+  };
+  category: {
+    data: {
+      type: string;
+      id: string;
+    };
+  };
+  measure: {
+    data: {
+      type: string;
+      id: string;
+    };
+  };
+  logo: {
+    data: null | any;
+  };
+  markdowns: {
+    data: any[];
+  };
+}
+export interface PosifloraProduct {
+  type: string;
+  id: string;
+  attributes: ProductAttributes;
+  relationships: ProductRelationships;
+}
